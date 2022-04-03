@@ -108,12 +108,13 @@ Matrix Matrix::operator*(Matrix const& other){
     }
     Matrix res(vec , (int)this->rows ,(int)other.cols);
     return res;
-
-
-    return *this;
 }
 void Matrix::operator*=(const double &num){
-
+    for(size_t i = 0; i < this->rows; i++){
+        for(size_t j = 0; j < this->cols; j++){
+            this->mat.at(i).at(j) = (this->mat.at(i).at(j) * num);
+        }
+    }
 }
 // Matrix Matrix::operator*(double const &num,Matrix other){
 //     return *this;

@@ -28,6 +28,7 @@ namespace zich{
         void operator-=(Matrix const& other);
         Matrix operator-();
         Matrix operator*(Matrix const& other);
+        void operator*=(double const& num);
         friend Matrix operator*(double const &num,Matrix other);
 
         bool operator<(Matrix const& other);
@@ -42,7 +43,7 @@ namespace zich{
         Matrix& operator--();
         Matrix operator--(int);
 
-        void operator*=(double const& num);
+        
         friend ostream& operator<<(ostream& out,Matrix const &a);
         friend istream& operator>>(ostream& in,Matrix const add_pointer);
     };

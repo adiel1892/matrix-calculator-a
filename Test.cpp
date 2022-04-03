@@ -108,4 +108,16 @@ TEST_CASE("bool"){
     CHECK(h.getMatrix().at(1).at(1) == 26);
     CHECK(h.getMatrix().at(1).at(2) == 33);
 
+            // ------- checking * num -------
+    a *= 3;
+    CHECK(a.getMatrix().at(0).at(0) == 3);
+    CHECK(a.getMatrix().at(0).at(1) == 6);
+    CHECK(a.getMatrix().at(0).at(2) == 9);
+    CHECK(a.getMatrix().at(1).at(0) == 12);
+    CHECK(a.getMatrix().at(1).at(1) == 15);
+    CHECK(a.getMatrix().at(1).at(2) == 18);
+    CHECK(a.getMatrix().at(2).at(0) == 21);
+    CHECK(a.getMatrix().at(2).at(1) == 24);
+    CHECK(a.getMatrix().at(2).at(2) == 27);
+
 }
