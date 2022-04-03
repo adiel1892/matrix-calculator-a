@@ -32,18 +32,25 @@ Matrix Matrix::operator+(Matrix const& other){
     if(other.cols != this->cols || other.rows != this->rows){
         __throw_invalid_argument("Different matrix size!");
     }
+    vector<double> vec;
     for(size_t i = 0; i < this->rows; i++){
         for(size_t j = 0; j < this->cols; j++){
-            this->mat.at(i).at(j) = (this->mat.at(i).at(j) + other.mat.at(i).at(j));
+            vec.push_back((this->mat.at(i).at(j) + other.mat.at(i).at(j)));
+            // this->mat.at(i).at(j) = (this->mat.at(i).at(j) + other.mat.at(i).at(j));
         }
     }
-    return *this;
+    Matrix res(vec , (int)this->rows , (int)this->cols);
+    return res;
 }
 void Matrix::operator+=(Matrix const& other){
     if(other.cols != this->cols || other.rows != this->rows){
         __throw_invalid_argument("Different matrix size!");
     }
-
+    for(size_t i = 0; i < this->rows; i++){
+        for(size_t j = 0; j < this->cols; j++){
+            this->mat.at(i).at(j) = (this->mat.at(i).at(j) + other.mat.at(i).at(j));
+        }
+    }
 }
 Matrix Matrix::operator+(){
     return *this;
@@ -53,16 +60,24 @@ Matrix Matrix::operator-(Matrix const& other){
     if(other.cols != this->cols || other.rows != this->rows){
         __throw_invalid_argument("Different matrix size!");
     }
+    vector<double> vec;
     for(size_t i = 0; i < this->rows; i++){
         for(size_t j = 0; j < this->cols; j++){
-            this->mat.at(i).at(j) = (this->mat.at(i).at(j) - other.mat.at(i).at(j));
+            vec.push_back((this->mat.at(i).at(j) - other.mat.at(i).at(j)));
+            // this->mat.at(i).at(j) = (this->mat.at(i).at(j) + other.mat.at(i).at(j));
         }
     }
-    return *this;
+    Matrix res(vec , (int)this->rows , (int)this->cols);
+    return res;
 }
 void Matrix::operator-=(Matrix const& other){
     if(other.cols != this->cols || other.rows != this->rows){
         __throw_invalid_argument("Different matrix size!");
+    }
+    for(size_t i = 0; i < this->rows; i++){
+        for(size_t j = 0; j < this->cols; j++){
+            this->mat.at(i).at(j) = (this->mat.at(i).at(j) - other.mat.at(i).at(j));
+        }
     }
 
 }
@@ -70,6 +85,31 @@ Matrix Matrix::operator-(){
     return *this;
 }
 Matrix Matrix::operator*(Matrix const& other){
+    if(this->cols != other.rows){
+        __throw_invalid_argument("can't mult!");
+    }
+    // 1 2 3   1 2
+    // 4 5 6 * 3 4
+    //         5 6
+    //
+    // 2X3 X 3X2
+    vector<double> vec;
+    double sum = 0;
+    for(size_t i = 0; i < this->rows; i++){
+        for(size_t j = 0; j < other.cols; j++){
+            for(size_t k = 0; k < this->cols; k++){
+                sum += this->mat.at(i).at(k) * other.mat.at(k).at(j);
+                if(k == this->cols - 1){
+                    vec.push_back(sum);
+                    sum = 0;
+                }
+            }
+        }
+    }
+    Matrix res(vec , (int)this->rows ,(int)other.cols);
+    return res;
+
+
     return *this;
 }
 void Matrix::operator*=(const double &num){
@@ -141,6 +181,17 @@ Matrix Matrix::operator--(int a){
 }
 
 ostream& operator<<(ostream& out, Matrix const& a){
+    for(size_t i = 0; i < a.getRows(); i++){
+        out << "[";
+        for(size_t j = 0; j < a.getCols(); j++){
+            if(j != a.getCols() - 1){
+                out << a.getMatrix().at(i).at(j) << " ";
+            }else{
+                out << a.getMatrix().at(i).at(j) << "]";
+            }
+        }
+        out << "\n";
+    }
     // out << "bannana";
     return out;
 
