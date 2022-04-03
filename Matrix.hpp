@@ -19,8 +19,8 @@ namespace zich{
         vector<vector<double>> getMatrix(){return this->mat;}
         unsigned int getRows(){return this->rows;}
         unsigned int getCols(){return this->cols;}
-        void setRows(unsigned int rows){this->rows = rows;}
-        void setCols(unsigned int cols){this->cols = cols;}
+        // void setRows(unsigned int rows){this->rows = rows;}
+        // void setCols(unsigned int cols){this->cols = cols;}
         Matrix operator+(Matrix const& other);
         void operator+=(Matrix const& other);
         Matrix operator+();
@@ -29,7 +29,6 @@ namespace zich{
         Matrix operator-();
         Matrix operator*(Matrix const& other);
         friend Matrix operator*(double const &num,Matrix other);
-
 
         bool operator<(Matrix const& other);
         bool operator<=(Matrix const& other);
@@ -46,8 +45,5 @@ namespace zich{
         void operator*=(double const& num);
         friend ostream& operator<<(ostream&,Matrix const &);
         friend istream& operator>>(ostream&,Matrix const);
-
-
-
     };
 }

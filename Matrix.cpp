@@ -29,9 +29,20 @@ Matrix::~Matrix(){
     
 }
 Matrix Matrix::operator+(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
+    for(size_t i = 0; i < this->rows; i++){
+        for(size_t j = 0; j < this->cols; j++){
+            this->mat.at(i).at(j) = (this->mat.at(i).at(j) + other.mat.at(i).at(j));
+        }
+    }
     return *this;
 }
 void Matrix::operator+=(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
 
 }
 Matrix Matrix::operator+(){
@@ -39,9 +50,20 @@ Matrix Matrix::operator+(){
 }
 
 Matrix Matrix::operator-(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
+    for(size_t i = 0; i < this->rows; i++){
+        for(size_t j = 0; j < this->cols; j++){
+            this->mat.at(i).at(j) = (this->mat.at(i).at(j) - other.mat.at(i).at(j));
+        }
+    }
     return *this;
 }
 void Matrix::operator-=(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
 
 }
 Matrix Matrix::operator-(){
@@ -58,21 +80,46 @@ void Matrix::operator*=(const double &num){
 // }
 
 bool Matrix::operator>(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
     return true;
 }
 bool Matrix::operator>=(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
     return true;
 }
 bool Matrix::operator<(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
     return true;
 }
 bool Matrix::operator<=(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
     return true;
 }
 bool Matrix::operator==(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
+    for(size_t i = 0; i < this->rows; i++){
+        for(size_t j = 0; j < this->cols; j++){
+            if(this->mat.at(i).at(j) != other.mat.at(i).at(j)){
+                return false;
+            }
+        }
+    }
     return true;
 }
 bool Matrix::operator!=(Matrix const& other){
+    if(other.cols != this->cols || other.rows != this->rows){
+        __throw_invalid_argument("Different matrix size!");
+    }
     return true;
 }
 
@@ -94,6 +141,7 @@ Matrix Matrix::operator--(int a){
 }
 
 ostream& operator<<(ostream& out, Matrix const& a){
+    // out << "bannana";
     return out;
 
 }
