@@ -8,31 +8,38 @@ using namespace std;
 namespace zich{
 
     class Matrix{
-        private:
+        vector<vector<double>> mat;
+        int rows;
+        int cols;
 
         public:
         Matrix(vector<double>, const int,const int);
 
-        friend Matrix operator +(const Matrix& a, const Matrix& b);
-        friend Matrix operator +(const Matrix& a);
-        friend Matrix operator +=(const Matrix& a, const Matrix& b);
-        friend Matrix operator -(const Matrix& a, const Matrix& b);
-        friend Matrix operator -(const Matrix& a);
-        friend Matrix operator -=(const Matrix& a, const Matrix& b);
-        friend Matrix operator *(const Matrix& a, const Matrix& b);
-        friend Matrix operator *(double num, const Matrix& a);
+        Matrix operator +(const Matrix& other);
+        Matrix operator +=(const Matrix& other);
+        Matrix operator +();
+        Matrix operator -(const Matrix& other);
+        Matrix operator -=(const Matrix& other);
+        Matrix operator -();
+        Matrix operator *(const Matrix& other);
+        friend Matrix operator *(double const &num, const Matrix& other);
 
-        friend bool operator<(const Matrix& a, const Matrix& b);
-        friend bool operator<=(const Matrix& a, const Matrix& b);
-        friend bool operator>(const Matrix& a, const Matrix& b);
-        friend bool operator>=(const Matrix& a, const Matrix& b);
-        friend bool operator==(const Matrix& a, const Matrix& b);
-        friend bool operator!=(const Matrix& a, const Matrix& b);
-        Matrix operator-();
-        Matrix operator++();
-        Matrix operator--();
+
+        bool operator<(const Matrix& other);
+        bool operator<=(const Matrix& other);
+        bool operator>(const Matrix& other);
+        bool operator>=(const Matrix& other);
+        bool operator==(const Matrix& other);
+        bool operator!=(const Matrix& other);
+
+        Matrix& operator++();
+        Matrix operator++(int);
+        Matrix& operator--();
+        Matrix operator--(int);
+        
         Matrix operator*=(double);
-        friend ostream &operator<<(ostream &os, Matrix a);
+        friend ostream& operator<<(ostream&,const Matrix&);
+        friend istream& operator>>(ostream&,const Matrix);
 
 
 
