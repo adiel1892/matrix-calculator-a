@@ -123,6 +123,7 @@ Matrix zich::operator*(double const &num,Matrix const& other){
 }
 
 ostream& zich::operator<<(ostream& out, Matrix const& a){
+    out << "matrix-calculator-a";
     return out;
 }
 
