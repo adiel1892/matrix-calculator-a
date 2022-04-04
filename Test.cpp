@@ -21,7 +21,7 @@ TEST_CASE("initiallize Matrix"){
 
 }
 
-TEST_CASE("bool"){
+TEST_CASE("+ - *"){
     vector<double> vec1 = {1,2,3,4,5,6,7,8,9};
     Matrix a(vec1, 3, 3);
     Matrix b(vec1, 3, 3);
@@ -119,5 +119,32 @@ TEST_CASE("bool"){
     CHECK(a.getMatrix().at(2).at(0) == 21);
     CHECK(a.getMatrix().at(2).at(1) == 24);
     CHECK(a.getMatrix().at(2).at(2) == 27);
+
+}
+
+
+TEST_CASE("bool"){
+    vector<double> vec1 = {1,2,3,4,5,6,7,8,9};
+    vector<double> vec2 = {1,2,3,4,5,6,7,8,8};
+    Matrix a(vec1, 3, 3);
+    Matrix b(vec2, 3, 3);
+    Matrix c(vec1, 3, 3);
+    bool bigger1 = a > b;
+    bool not_bigger = b > a;
+    bool ans1 = true;
+    bool ans2 = false;
+    CHECK(bigger1 == ans1);
+    CHECK(not_bigger == ans2);
+    // bool equal = a == c;
+    bool equal_bigger = a >= c;
+    bool not_equal_bigger = b >= a;
+    // CHECK(equal == ans1);
+    CHECK(equal_bigger == ans1);
+    CHECK(not_equal_bigger == ans2);
+    bool less_equal = c <= a;
+    bool less = b < a;
+    CHECK(less_equal == ans1);
+    CHECK(less == ans1);
+
 
 }
